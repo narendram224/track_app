@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignupScreen from './src/screen/SignupScreen';
 import SigninScreen from './src/screen/SignInScreen';
 import DashBoardScreen from './src/screen/DashBoardScreen';
+import {Provider as AuthProvider} from './src/context/AuthContext';
 
 function HomeScreen() {
   return (
@@ -20,15 +21,16 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
+    <AuthProvider>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Signup" component={SignupScreen}  />
+        <Stack.Screen name="Signup" component={SignupScreen} options={{headerShown: false}}  />
         <Stack.Screen name="Signin" component={SigninScreen} />
-        {/* options={{headerShown: false}} */}
         <Stack.Screen name="DashBoard" component={DashBoardScreen} options={{headerShown: false}} />
 
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthProvider>
   );
 }
 
