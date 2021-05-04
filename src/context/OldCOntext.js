@@ -1,8 +1,8 @@
 import CreateDataContext from "./CreateDataContext";
 import TrackApi from '../api/tracker';
 const authReducer = (state, action) =>{
-    console.log("acutola state",action)
-     switch (action.type) {
+    console.log("acutola state",state)
+     switch (state.type) {
          case "create_track":
              
          return state;   
@@ -10,7 +10,9 @@ const authReducer = (state, action) =>{
              console.log("runs signup_error",action.payload);
              
             return {...state,errorMessage:action.payload}  ;
-      
+        case 'demo':
+            
+            return {...state,errorMessage:action.payload};
          default:
              return state;
      }
@@ -19,21 +21,20 @@ const authReducer = (state, action) =>{
 
 const signup =(dispatch)=>{
     return async({email, password})=>{
-        console.log("function signup");
-        
             // signup process here
-            try {
-                const response = await TrackApi.post('/register',{email, password});
-                console.log(response.data);
+            dispatch({type:"demo",payload:"hello fromjs"})
+            // try {
+            //     const response = await TrackApi.post('/register',{email, password});
+            //     console.log(response.data);
                                 
 
-            } catch (error) {
-                console.log("error",error.response.data);
+            // } catch (error) {
+            //     console.log("error",error.response.data);
                 
-                dispatch({type:"signup_error",payload:"Something when wrong"})
+            //     dispatch({type:"signup_error",payload:"Something when wrong"})
                 
                 
-            }
+            // }
     }
 }
 const signin =(dispatch)=>{
@@ -51,4 +52,4 @@ const signout =(dispatch)=>{
             // checking the failure status
     }
 }
-export const{Context,Provider} = CreateDataContext(authReducer,{signin,signup,signout},{isSignedIn:false});
+export const{Context,Provider} = CreateDataContext(authReducer,{signin,signup,signout},{isSignedIn:false,errorMessage:""});

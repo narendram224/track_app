@@ -5,11 +5,11 @@ export default (reducer,actions,initialState)=>{
         const [state,dispatch] = useReducer(reducer,initialState);
         useEffect(() => {
         console.log("Create Data context state obj",state,"initial Obj",initialState);
-            
-           
         }, [initialState])
         const boundAction ={};
         for (let key in actions) {
+            console.log("bloun actions key",key);
+            
             boundAction[key] = actions[key](dispatch);
         }
 

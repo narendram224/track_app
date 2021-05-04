@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { StyleSheet,  View } from 'react-native'
-import {Button,Text,Input} from 'react-native-elements';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Spacer from '../components/spacer';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import Spacer from '../components/spacer'
 import PrimaryInput from '../components/PrimaryInput';
-import PrimaryButton from '../components/PrimaryButton';
 import {Context as AuthContext} from '../context/AuthContext';
-import NavLink from '../components/NavLink';
-function SignupScreen({navigation}){
+import PrimaryButton from '../components/PrimaryButton';
+function AuthFrom(){
     const {state,signup} = useContext(AuthContext);
     const [form, setform] = useState({
         email:"",
@@ -18,16 +17,6 @@ function SignupScreen({navigation}){
         console.log("the form has been submitted",form);
         signup({email:form.email,password:form.password});
     }
-    // useEffect(() => {
-    //     console.log("The form data is:",form);
-        
-    // }, [form])
-    useEffect(() => {
-       console.log("effect runs in signup",state);
-       
-    }, [state])
-    
-   
     return (
         <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
@@ -49,17 +38,12 @@ function SignupScreen({navigation}){
     )
 }
 
-export default SignupScreen
+export default AuthFrom
 const styles = StyleSheet.create({
     container: {
-        borderWidth:1,
-        borderColor:'tomato',
-        flex:1, 
-        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
       },
-      error:{
-          fontSize:18,
-          marginLeft:10,
-          color:"tomato"
-      }
  })
